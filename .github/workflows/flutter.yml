@@ -1,0 +1,26 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: ['feature/*']
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Java JDK
+      uses: actions/setup-java@v1.3.0
+      with:
+        java-version: '12.x'
+    - uses: subosito/flutter-action@v1
+      with:
+        channel: 'stable'
+    - name: Getting Flutter Packages
+      run: flutter pub get
+    - name: Analyzing code
+      run: flutter analyze
+    - name: Running tests
+      run: flutter test
