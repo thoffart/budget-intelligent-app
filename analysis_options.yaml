@@ -1,0 +1,17 @@
+include: package:pedantic/analysis_options.yaml
+
+analyzer:
+  exclude: [build/**]
+  errors:
+    todo: ignore
+linter:
+  rules:
+    omit_local_variable_types: false
+    prefer_for_elements_to_map_fromIterable: false
+    prefer_mixin: true
+    type_annotate_public_apis: true
+    unnecessary_lambdas: true
+    avoid_equals_and_hash_code_on_mutable_classes: true
+    avoid_catches_without_on_clauses: true
+    prefer_interpolation_to_compose_strings: true
+    directives_ordering: true
