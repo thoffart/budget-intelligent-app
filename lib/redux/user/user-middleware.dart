@@ -17,16 +17,6 @@ String _meQuery = '''
       roles{
         name
       }
-      despesa {
-        id
-        nome
-        categoria
-        produto {
-          nome
-          quantidade
-          valor
-        }
-      }
     }
   }''';
 

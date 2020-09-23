@@ -20,16 +20,6 @@ final userQueryData = '''
   roles{
     name
   }
-  despesa {
-    id
-    nome
-    categoria
-    produto {
-      nome
-      quantidade
-      valor
-    }
-  }
   ''';
 
 final String loginMutation = '''
