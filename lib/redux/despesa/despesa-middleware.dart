@@ -1,6 +1,26 @@
 
+import 'package:graphql/client.dart';
 import 'package:redux/redux.dart';
+import 'package:tcc_app/app-state.dart';
+import 'package:tcc_app/client/base-graphql-client.dart';
 import 'package:tcc_app/redux/despesa/despesa-actions.dart';
+
+
+final String getAllDespesaQuery = r'''
+  query getAllDespesa($filter: DespesaFilterInput) {
+    getAllDespesa(filter: $filter) {
+      id
+      nome
+      categoria
+      produto {
+        id
+        quantidade
+        nome
+        valor
+    }
+    }
+  }
+''';
 
 class DespesaMiddleware extends MiddlewareClass {
 
@@ -8,7 +28,20 @@ class DespesaMiddleware extends MiddlewareClass {
   void call(Store store, dynamic action, NextDispatcher next) async {
 
     if (action is GetDespesaFirstTime) {
-      
+      final QueryOptions _getAllDespesaOptions = QueryOptions(
+        documentNode: gql(getAllDespesaQuery),
+        variables: <String, dynamic>{
+          'filter': {
+            'id_usuario': (store.state as AppState).userState.user.id,
+          }
+        }
+      );
+      final _getAllDespesaQuery = await BaseGraphQLClient.client.query(_getAllDespesaOptions);
+      if (_getAllDespesaQuery.hasException) {
+        print('error');
+      } else {
+        store.dispatch(GetDespesaFirstTimeSuccess(_getAllDespesaQuery.data['getAllDespesa']));
+      }
     }
 
     if (action is GetDespesaFirstTimeSuccess) { 
@@ -44,5 +77,7 @@ class DespesaMiddleware extends MiddlewareClass {
       
     }
 
+    next(action);
+    
   }
 }

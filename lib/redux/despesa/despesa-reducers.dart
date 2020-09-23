@@ -20,7 +20,7 @@ final Reducer<DespesaState> despesaReducer = combineReducers<DespesaState>([
 DespesaState _cadastroDespesa(DespesaState state, CadastroDespesa action) => state;
 
 DespesaState _cadastroDespesaSuccess(DespesaState state, CadastroDespesaSuccess action) {
-  final Map<String, Map<String, dynamic>> dataNormalized = Normalizer.normalizeList([action.despesa], 'id').cast<String, Map<String, dynamic>>();
+  final Map<String, Map<String, dynamic>> dataNormalized = DartNormalizer.normalizeList([action.despesa], 'id', [NestedObject(objectIdKey: 'id', objectKey: 'produto')]).cast<String, Map<String, dynamic>>();
   final Map<String, Map<String, dynamic>> newDespesaById = {...dataNormalized, ...state.despesaById};
   return state.copyWith(despesaById: newDespesaById);
 }
@@ -32,7 +32,7 @@ DespesaState _despesaCleanState(DespesaState state, DespesaCleanState action) =>
 DespesaState _editFormDespesa(DespesaState state, EditFormDespesa action) => state;
 
 DespesaState _editFormDespesaSuccess(DespesaState state, EditFormDespesaSuccess action) {
-  final Map<String, Map<String, dynamic>> dataNormalized = Normalizer.normalizeList([action.despesa], 'id').cast<String, Map<String, dynamic>>();
+  final Map<String, Map<String, dynamic>> dataNormalized = DartNormalizer.normalizeList([action.despesa], 'id', [NestedObject(objectIdKey: 'id', objectKey: 'produto')]).cast<String, Map<String, dynamic>>();
   final Map<String, Map<String, dynamic>> newDespesaById = {...dataNormalized, ...state.despesaById};
   return state.copyWith(despesaById: newDespesaById);
 }
@@ -40,7 +40,7 @@ DespesaState _editFormDespesaSuccess(DespesaState state, EditFormDespesaSuccess 
 DespesaState _getDespesaFirstTime(DespesaState state, GetDespesaFirstTime action) => state;
 
 DespesaState _getDespesaFirstTimeSuccess(DespesaState state, GetDespesaFirstTimeSuccess action) {
-  final Map<String, Map<String, dynamic>> dataNormalized = Normalizer.normalizeList(action.despesaList, 'id').cast<String, Map<String, dynamic>>();
+  final Map<String, Map<String, dynamic>> dataNormalized = DartNormalizer.normalizeList(action.despesaList, 'id', [NestedObject(objectIdKey: 'id', objectKey: 'produto')]).cast<String, Map<String, dynamic>>();
   final Map<String, Map<String, dynamic>> newDespesaById = {...dataNormalized, ...state.despesaById};
   return state.copyWith(despesaById: newDespesaById, isFirstTimeAccess: false);
 }
@@ -48,7 +48,7 @@ DespesaState _getDespesaFirstTimeSuccess(DespesaState state, GetDespesaFirstTime
 DespesaState _refreshDespesa(DespesaState state, RefreshDespesa action) => state;
 
 DespesaState _refreshDespesaSuccess(DespesaState state, RefreshDespesaSuccess action) {
-  final Map<String, Map<String, dynamic>> dataNormalized = Normalizer.normalizeList(action.despesaList, 'id').cast<String, Map<String, dynamic>>();;
+  final Map<String, Map<String, dynamic>> dataNormalized = DartNormalizer.normalizeList(action.despesaList, 'id', [NestedObject(objectIdKey: 'id', objectKey: 'produto')]).cast<String, Map<String, dynamic>>();;
   final Map<String, Map<String, dynamic>> newDespesaById = {...dataNormalized, ...state.despesaById};
   return state.copyWith(despesaById: newDespesaById);
 }

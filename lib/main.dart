@@ -12,7 +12,7 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   
-  final store = Store<AppState>(
+  final _store = Store<AppState>(
     rootReducer,
     initialState: AppState.initial(),
     middleware: appMiddleware,
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
-      store: store,
+      store: _store,
       child: MaterialApp(
         title: 'Moradia',
         debugShowCheckedModeBanner: false,

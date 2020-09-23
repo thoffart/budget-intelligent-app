@@ -43,7 +43,7 @@ class UserMiddleware extends MiddlewareClass<AppState> {
     }
 
     if (action is UpdateUserSuccess) {
-      
+
     }
 
     next(action);

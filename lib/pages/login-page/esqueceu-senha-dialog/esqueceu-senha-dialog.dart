@@ -17,24 +17,24 @@ class _EsqueceuSenhaDialogState extends State<EsqueceuSenhaDialog> {
   final _formEsqueceuSenha = GlobalKey<FormState>();
   final _emailController = TextEditingController();
 
-   InputDecoration _inputDecoration(Icon icon, String hintText, [IconData suffixIcon, Function changeObscuredText]) => InputDecoration(
+   InputDecoration _inputDecoration(Icon icon, String hintText, [IconData suffixIcon, Function changeObscupurpleText]) => InputDecoration(
     icon: icon,
     hintText: hintText,
     fillColor:  Color.fromRGBO(79, 232, 234, 0.8),
     focusedBorder: UnderlineInputBorder(
       borderSide: BorderSide(
-        color: Colors.red
+        color: Colors.purple
       )
     ),
     focusedErrorBorder: UnderlineInputBorder(
-      borderSide: BorderSide(color: Colors.red)
+      borderSide: BorderSide(color: Colors.purple)
     ),
     errorBorder: UnderlineInputBorder(
-      borderSide: BorderSide(color: Colors.red)
+      borderSide: BorderSide(color: Colors.purple)
     ),
     suffixIcon: suffixIcon == null ? null : InkWell(
       child: Icon(suffixIcon, color: Colors.grey),
-      onTap: () => changeObscuredText(),
+      onTap: () => changeObscupurpleText(),
     ),
   );
 
@@ -60,7 +60,7 @@ class _EsqueceuSenhaDialogState extends State<EsqueceuSenhaDialog> {
             }
             return null;
           },
-          decoration: _inputDecoration(Icon(Icons.email, color: Colors.red), 'E-mail'),
+          decoration: _inputDecoration(Icon(Icons.email, color: Colors.purple), 'E-mail'),
         ), 
         SizedBox(height: 4),
       ],
@@ -75,7 +75,7 @@ class _EsqueceuSenhaDialogState extends State<EsqueceuSenhaDialog> {
       gradient: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
-      colors: [Colors.red[300], Colors.red[900]]
+      colors: [Colors.purple[300], Colors.purple[900]]
       ),
     ),
     child: CustomPaint(
@@ -112,7 +112,6 @@ class _EsqueceuSenhaDialogState extends State<EsqueceuSenhaDialog> {
                 child: _form(),
               ),
               SizedBox(height: 10),
-              Divider(thickness: 2, height: 2,),
               RaisedButton(
                 onPressed: () {
                   if (_formEsqueceuSenha.currentState.validate()) {
@@ -122,8 +121,9 @@ class _EsqueceuSenhaDialogState extends State<EsqueceuSenhaDialog> {
                     widget.esqueceuSenhaAction(formText);
                   }
                 }, 
+                color: Colors.purple,
                 child: Text('Enviar'),
-                textColor: Colors.black,
+                textColor: Colors.white,
                 elevation: 0
               ),
               SizedBox(height: 2),

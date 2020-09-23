@@ -44,5 +44,7 @@ class ProdutoMiddleware extends MiddlewareClass {
       
     }
 
+    next(action);
+
   }
 }

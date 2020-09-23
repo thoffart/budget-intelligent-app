@@ -1,4 +1,4 @@
-class Normalizer<T> {
+class DartNormalizer<T> {
   
   static List normalizeMergeList(List a, List b, String key) {
     final Map aMap = Map.fromIterable(a, key: (v) => v[key], value: (v) => v);

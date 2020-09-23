@@ -17,7 +17,7 @@ AppState appReducers(AppState state, dynamic action) => AppState(
   despesaState: despesaReducer(state.despesaState, action),
 );
 
-AppState rootReducer(AppState state,dynamic action) {
+AppState rootReducer(AppState state, dynamic action) {
   if(action is LogoutAction) {
     return appReducers(AppState.initial(), action);
   }
