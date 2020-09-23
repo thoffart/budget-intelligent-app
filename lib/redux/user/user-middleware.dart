@@ -9,7 +9,24 @@ import 'package:redux/redux.dart';
 String _meQuery = '''
   query me {
     me {
-      
+      id
+      nome
+      sobrenome
+      email
+      auth_token
+      roles{
+        name
+      }
+      despesa {
+        id
+        nome
+        categoria
+        produto {
+          nome
+          quantidade
+          valor
+        }
+      }
     }
   }''';
 

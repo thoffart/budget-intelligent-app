@@ -5,7 +5,6 @@ import 'package:redux/redux.dart';
 final Reducer<LoginState> loginReducer = combineReducers<LoginState>([
   TypedReducer<LoginState,LoginAction>(_loginAction),
   TypedReducer<LoginState,ForgotPasswordAction>(_forgotPasswordAction),
-  TypedReducer<LoginState,CadastroPage>(_cadastroPage),
   TypedReducer<LoginState,LoginError>(_loginError),
   TypedReducer<LoginState,LoginSuccess>(_loginSuccess),
   TypedReducer<LoginState,ChangeObscuredText>(_changeObscuredText),
@@ -25,8 +24,6 @@ LoginState _forgotPasswordAction(LoginState state, ForgotPasswordAction action) 
 LoginState _loginError(LoginState state, LoginError action) {
   return state.copyWith(hasError: true, errorMessage: action.errorMessage);
 }
-
-LoginState _cadastroPage(LoginState state, CadastroPage action) => state;
 
 LoginState _logoutAction(LoginState state, LogoutAction action) => state;
 

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tcc_app/pages/home-page/home-page.dart';
 import 'package:tcc_app/pages/introduction-page/introduction-page.dart';
 import 'package:tcc_app/pages/login-page/login-page.dart';
 
@@ -24,6 +25,6 @@ final Map<String, WidgetBuilder> appRoutes = <String, WidgetBuilder>{
   IntroductionPage.tag: (BuildContext context) => IntroductionPage(),
   LoginPage.tag: (BuildContext context) => LoginPage(),
   CadastroPage.tag: (BuildContext context) => CadastroPage(),
-  
+  HomePage.tag: (BuildContext context) => HomePage(),
 };
 

@@ -12,8 +12,6 @@ class LoginError {
 
 class ForgotPasswordAction { }
 
-class CadastroPage { }
-
 class LoginSuccess {
   final User user;
   LoginSuccess(this.user);

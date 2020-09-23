@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:tcc_app/app-state.dart';
 import 'package:tcc_app/keys.dart';
 import 'package:tcc_app/pages/login-page/+model/login-page-model.dart';
@@ -53,17 +54,17 @@ class _LoginPageState extends State<LoginPage> {
   InputDecoration _inputDecoration(Icon icon, String hintText, [IconData suffixIcon, Function changeObscuredText]) => InputDecoration(
     icon: icon,
     hintText: hintText,
-    fillColor:  Colors.red,
+    fillColor:  Colors.purple,
     focusedBorder: UnderlineInputBorder(
       borderSide: BorderSide(
         color: Colors.black
       )
     ),
     focusedErrorBorder: UnderlineInputBorder(
-      borderSide: BorderSide(color: Colors.red)
+      borderSide: BorderSide(color: Colors.purple)
     ),
     errorBorder: UnderlineInputBorder(
-      borderSide: BorderSide(color: Colors.red)
+      borderSide: BorderSide(color: Colors.purple)
     ),
     suffixIcon: suffixIcon == null ? null : InkWell(
       child: Icon(suffixIcon, color: Colors.grey),
@@ -116,12 +117,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildLogo() {
     var customPaint = CustomPaint(
           painter: CurvePainter(),
-          child: Padding(
-            padding: const EdgeInsets.all(50),
-            child: Image.asset(
-              'assets/images/logo-branco.png',
-            ),
-          ),
+          child: Center(child: AutoSizeText('Budget Intelligent', style: TextStyle(color: Colors.white, fontSize: 64), textAlign: TextAlign.center,)),
         );
     return Stack(
     alignment: Alignment.topLeft,
@@ -133,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
           gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Colors.red[300], Colors.red[900]]
+          colors: [Colors.purple[300], Colors.purple[900]]
           ),
         ),
         child: customPaint,
@@ -178,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   child: Text('ENTRAR'),
                   textColor: Colors.white,
-                  color: Colors.red,
+                  color: Colors.purple,
                 ),
                 SizedBox(height: 16),
                 _forgetPasswordLabel(loginPageModel.esqueceuSenhaAction),

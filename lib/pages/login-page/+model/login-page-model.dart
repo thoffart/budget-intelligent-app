@@ -7,7 +7,6 @@ import 'package:redux/redux.dart';
 class LoginPageModel{
 
   final Function(dynamic formText) loginAction;
-  final Function() cadastroPage;
   final Function() changeObscuredText;
   final Function() changeIsLogging;
   final bool obscuredText;
@@ -18,7 +17,6 @@ class LoginPageModel{
 
   LoginPageModel({
     this.loginAction,
-    this.cadastroPage,
     this.hasError,
     this.changeObscuredText,
     this.changeIsLogging,
@@ -48,7 +46,6 @@ class LoginPageModel{
   static LoginPageModel fromStore(Store<AppState> store) =>
     LoginPageModel(
       loginAction: (formText) => store.dispatch(LoginAction(formText)),
-      cadastroPage: () => store.dispatch(CadastroPage()),
       changeObscuredText: () => store.dispatch(ChangeObscuredText()),
       changeIsLogging: () => store.dispatch(ChangeIsLogging()),
       obscuredText: store.state.loginState.obscuredText,

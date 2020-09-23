@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+  static const tag = 'home-page';
   HomePage({Key key}) : super(key: key);
 
   @override
@@ -11,7 +12,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-       child: Container(),
+       child: Container(
+         child: Center(child: Text('home page'),),
+       ),
     );
   }
 }
