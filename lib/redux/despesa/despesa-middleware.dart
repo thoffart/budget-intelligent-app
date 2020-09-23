@@ -4,6 +4,7 @@ import 'package:redux/redux.dart';
 import 'package:tcc_app/app-state.dart';
 import 'package:tcc_app/client/base-graphql-client.dart';
 import 'package:tcc_app/redux/despesa/despesa-actions.dart';
+import 'package:tcc_app/redux/produto/produto-actions.dart';
 
 
 final String getAllDespesaQuery = r'''
@@ -40,6 +41,7 @@ class DespesaMiddleware extends MiddlewareClass {
       if (_getAllDespesaQuery.hasException) {
         print('error');
       } else {
+        store.dispatch(UpdateProdutoById((_getAllDespesaQuery.data['getAllDespesa'] as List).map((despesa) => despesa['produto']).expand((produto) => produto).toList()));
         store.dispatch(GetDespesaFirstTimeSuccess(_getAllDespesaQuery.data['getAllDespesa']));
       }
     }

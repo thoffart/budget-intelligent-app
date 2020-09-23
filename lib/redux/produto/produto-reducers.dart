@@ -14,6 +14,7 @@ final Reducer<ProdutoState> produtoReducer = combineReducers<ProdutoState>([
   TypedReducer<ProdutoState,EditFormProduto>(_editFormProduto),
   TypedReducer<ProdutoState,EditFormProdutoSuccess>(_editFormProdutoSuccess),
   TypedReducer<ProdutoState,ProdutoCleanState>(_produtoCleanState),
+  TypedReducer<ProdutoState,UpdateProdutoById>(_updateProdutoById),
 ]);
 
 ProdutoState _cadastroProduto(ProdutoState state, CadastroProduto action) => state;
@@ -47,6 +48,12 @@ ProdutoState _getProdutoFirstTimeSuccess(ProdutoState state, GetProdutoFirstTime
 ProdutoState _refreshProduto(ProdutoState state, RefreshProduto action) => state;
 
 ProdutoState _refreshProdutoSuccess(ProdutoState state, RefreshProdutoSuccess action) {
+  final Map<String, Map<String, dynamic>> dataNormalized = DartNormalizer.normalizeList(action.produtoList, 'id').cast<String, Map<String, dynamic>>();;
+  final Map<String, Map<String, dynamic>> newProdutoById = {...dataNormalized, ...state.produtoById};
+  return state.copyWith(produtoById: newProdutoById);
+}
+
+ProdutoState _updateProdutoById(ProdutoState state, UpdateProdutoById action) {
   final Map<String, Map<String, dynamic>> dataNormalized = DartNormalizer.normalizeList(action.produtoList, 'id').cast<String, Map<String, dynamic>>();;
   final Map<String, Map<String, dynamic>> newProdutoById = {...dataNormalized, ...state.produtoById};
   return state.copyWith(produtoById: newProdutoById);

@@ -16,6 +16,11 @@ class RefreshProdutoSuccess {
   RefreshProdutoSuccess(this.produtoList);
 }
 
+class UpdateProdutoById {
+  final List<dynamic> produtoList;
+  UpdateProdutoById(this.produtoList);
+}
+
 class CadastroProduto {
   Map<String, dynamic> formValue;
   CadastroProduto(this.formValue);
