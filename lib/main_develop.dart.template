@@ -1,0 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:tcc_app/env.dart';
+import 'package:tcc_app/main.dart';
+
+void main() {
+  BuildEnvironment.init(
+    flavor: BuildFlavor.develop, 
+    baseUrl: 'http://${SERVER_NAME}/api',
+    baseUrlGraphql: 'http://${SERVER_NAME}/api/graphql',
+    baseWebSocket: 'ws://${SERVER_NAME}/graphql'
+  );
+  assert(env != null);
+  runApp(MyApp());
+}

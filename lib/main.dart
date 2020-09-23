@@ -1,43 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_app/utils/image-picker-tflite/image-picker-tflite.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:tcc_app/app-middleware.dart';
+import 'package:tcc_app/app-reducers.dart';
+import 'package:tcc_app/app-routes.dart';
+import 'package:tcc_app/app-state.dart';
+import 'package:tcc_app/keys.dart';
+import 'package:redux/redux.dart';
+import 'package:tcc_app/pages/startup-widget/startup-widget.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+  
+  final store = Store<AppState>(
+    rootReducer,
+    initialState: AppState.initial(),
+    middleware: appMiddleware,
+  );
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    return StoreProvider<AppState>(
+      store: store,
+      child: MaterialApp(
+        title: 'Moradia',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'Roboto',
+          primaryColor: Colors.blue,
+        ),
+        navigatorKey: Keys.navKey,
+        home: StartupWidget(),
+        routes: appRoutes,
+        onGenerateRoute: generateRoutesWithArguments,
+        builder: (context, child) => Scaffold(
+          key: Keys.scaffoldKey,
+          body: child,
+        ),
       ),
-      body: Center(
-        child: ImagePickerTflite()
-      )
     );
   }
 }

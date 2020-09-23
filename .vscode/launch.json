@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "local",
+        "program": "lib/main_local.dart",
+        "request": "launch",
+        "type": "dart"
+      },
+      {
+        "name": "Android",
+        "request": "launch",
+        "program": "lib/main_local.dart",
+        "type": "dart",
+        "deviceId": "emulator-5554"
+      },
+      {
+        "name": "iPhone",
+        "request": "launch",
+        "program": "lib/main_local.dart",
+        "type": "dart",
+        "deviceId": "iPhone 11 Pro Max"
+      },
+      {
+        "name": "iPad",
+        "request": "launch",
+        "program": "lib/main_local.dart",
+        "type": "dart",
+        "deviceId": "iPad Pro (12.9-inch)"
+      }
+    ],
+    "compounds": [
+      {
+        "name": "Android & iPhone",
+        "configurations": ["Android", "iPhone"]
+      },
+      {
+        "name": "Android & iPad",
+        "configurations": ["Android", "iPad"]
+      }
+    ]
+  }
+  
