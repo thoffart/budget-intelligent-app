@@ -31,7 +31,7 @@ class DespesaPage extends StatelessWidget {
             backgroundColor: Colors.purple,
             title: Text(despesaPageModel.despesa['nome']),
             actions: [
-              InkWell(onTap: () => Keys.navKey.currentState.pushNamed(CadastroProdutoPage.tag), child: Text('Adicionar Produto')),
+              InkWell(onTap: () => Keys.navKey.currentState.pushNamed(CadastroProdutoPage.tag), child: Center(child: Text('Adicionar Produto'))),
             ],
           ),
           body: ListView.builder(

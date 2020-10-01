@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tcc_app/pages/home-page/despesa-list-page/despesa-page/cadastro-produto-page/form-produto-container/form-produto/form-produto-widget.dart';
 import 'package:tcc_app/utils/default-button/default-button.dart';
 import 'package:tcc_app/utils/form-helper/form-helper.dart';
+import 'package:tcc_app/utils/image-picker-tflite/image-picker-tflite.dart';
 
 
 class FormCadastroProdutoContainer extends StatefulWidget {
@@ -111,7 +112,12 @@ class _FormProdutoContainerState extends State<FormCadastroProdutoContainer> {
                                 inputFormProdutoDecoration,
                               ),
                               SizedBox(height: 8),
-                              RaisedButton(onPressed: (){}, child: Text('Identificar Produto'), color: Colors.purple, textColor: Colors.white,)
+                              Container(
+                                height: 500,
+                                width: 200,
+                                child: ImagePickerTflite(),
+                              )
+                              //RaisedButton(onPressed: (){}, child: Text('Identificar Produto'), color: Colors.purple, textColor: Colors.white,)
                             ],
                           ),
                         )

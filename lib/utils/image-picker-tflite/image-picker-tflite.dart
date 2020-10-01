@@ -75,7 +75,7 @@ class _ImagePickerTfliteState extends State<ImagePickerTflite> {
             color: Colors.blue,
             padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
           )),
-        Container(
+/*         Container(
           margin: EdgeInsets.fromLTRB(0, 30, 0, 20),
           child: RaisedButton(
             onPressed: classifyImage,
@@ -86,7 +86,7 @@ class _ImagePickerTfliteState extends State<ImagePickerTflite> {
           )),
         result == null
           ? Text('Resultado: ')
-          : Text(result)
+          : Text(result) */
     ]))
     );
   }
