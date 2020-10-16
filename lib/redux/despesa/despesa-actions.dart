@@ -45,3 +45,9 @@ class EditFormDespesaSuccess {
 class DespesaCleanState {
   DespesaCleanState();
 }
+
+class AddProdutoToDespesa {
+  final String idDespesa;
+  final String idProduto;
+  AddProdutoToDespesa(this.idDespesa, this.idProduto);
+}

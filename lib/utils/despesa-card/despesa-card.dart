@@ -8,8 +8,10 @@ class DespesaCard extends StatelessWidget {
   const DespesaCard({
     Key key,
     this.despesaId,
+    this.isClickable = true,
   }) : super(key: key);
   final String despesaId;
+  final bool isClickable;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +22,12 @@ class DespesaCard extends StatelessWidget {
         return  ListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           onTap: () {
-            Keys.navKey.currentState.pushNamed(
-              DespesaPage.tag,
-              arguments: despesaId,
-            );
+            if(isClickable) {
+              Keys.navKey.currentState.pushNamed(
+                DespesaPage.tag,
+                arguments: despesaId,
+              );
+            }
           },
           title: Text(
             'Nome: ${despesa['nome']}',

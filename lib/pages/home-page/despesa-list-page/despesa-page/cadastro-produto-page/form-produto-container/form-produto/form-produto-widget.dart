@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:tcc_app/utils/form-helper/form-helper.dart';
 import 'package:tcc_app/utils/validators/validators.dart';
 
@@ -45,8 +46,8 @@ class FormCadastroProdutoWidget extends StatelessWidget {
           TextFormField(
             controller: formHelper.attributes['quantidade']['controller'],
             onSaved: (value) {
-              double valor = formHelper.attributes['quantidade']['controller'].numberValue * 100;
-              addValueFormProduto({'quantidade': valor.toInt()});
+              String valor = (formHelper.attributes['quantidade']['controller'] as TextEditingController).text;
+              addValueFormProduto({'quantidade': int.parse(valor)});
             },
             textInputAction: TextInputAction.next,
             style: TextStyle(color: Colors.black),
@@ -61,7 +62,7 @@ class FormCadastroProdutoWidget extends StatelessWidget {
           TextFormField(
             controller: formHelper.attributes['valor']['controller'],
             onSaved: (value) {
-              addValueFormProduto({'valor': value});
+              addValueFormProduto({'valor': (formHelper.attributes['valor']['controller'] as MoneyMaskedTextController).numberValue});
             },
             validator: (value) => emptyValidator(value,  'valor'),
             textInputAction: TextInputAction.next,

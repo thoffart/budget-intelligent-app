@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tcc_app/app-state.dart';
 import 'package:tcc_app/keys.dart';
+import 'package:tcc_app/pages/home-page/despesa-list-page/cadastro-despesa-page/cadastro-despesa-page.dart';
 import 'package:tcc_app/pages/home-page/despesa-list-page/despesa-page/+model/despesa-page-model.dart';
 import 'package:tcc_app/pages/home-page/despesa-list-page/despesa-page/cadastro-produto-page/cadastro-produto-page.dart';
+import 'package:tcc_app/utils/default-button/default-button.dart';
 import 'package:tcc_app/utils/despesa-card/despesa-card.dart';
 import 'package:tcc_app/utils/produto-card/produto-card.dart';
 
@@ -15,15 +17,15 @@ class DespesaPage extends StatelessWidget {
   }) : super(key: key);
   final String despesaId;
 
-  Widget _buildCardDespesa() => DespesaCard(despesaId: despesaId);
+  Widget _buildCardDespesa() => DespesaCard(despesaId: despesaId, isClickable: false);
    
    
-  Widget _buildProdutoListCard(int index, Map<String, dynamic> produtoById) => ProdutoCard(produtoId: produtoById.keys.toList()[index]);
+  Widget _buildProdutoListCard(int index, List produtoIds) => ProdutoCard(produtoId: produtoIds[index]);
 
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, DespesaPageModel>(
-      distinct: true,
+      distinct: false,
       converter: (store) => DespesaPageModel.fromStore(store, despesaId),
       builder: (BuildContext context, despesaPageModel) {
         return  Scaffold(
@@ -31,12 +33,39 @@ class DespesaPage extends StatelessWidget {
             backgroundColor: Colors.purple,
             title: Text(despesaPageModel.despesa['nome']),
             actions: [
-              InkWell(onTap: () => Keys.navKey.currentState.pushNamed(CadastroProdutoPage.tag), child: Center(child: Text('Adicionar Produto'))),
+              InkWell(onTap: () => Keys.navKey.currentState.pushNamed(CadastroDespesaPage.tag, arguments: {'despesa': despesaPageModel.despesa}), child: Center(child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Editar'),
+              ))),
             ],
           ),
-          body: ListView.builder(
-            itemCount: despesaPageModel.despesa['produto'].length + 1,
-            itemBuilder: (context, index) => (index == 0) ? _buildCardDespesa() : _buildProdutoListCard(index - 1, despesaPageModel.produtoById),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Expanded(
+                child: Stack(
+                  children: <Widget> [
+                    ListView.builder(
+                      itemCount: despesaPageModel.despesa['produto'].length + 1,
+                      itemBuilder: (context, index) => Card(
+                        child: (index == 0) ? _buildCardDespesa() : _buildProdutoListCard(index - 1, despesaPageModel.despesa['produto']),
+                      ),
+                    ),
+                    Positioned(
+                      child: DefaultButton.icon(
+                        iconData: Icons.add,
+                        iconColor: Colors.white,
+                        onPressed: () => Keys.navKey.currentState.pushNamed(CadastroProdutoPage.tag, arguments: {
+                          'id_despesa': despesaId,
+                        }),
+                      ),
+                      bottom: 20,
+                      right: 20,
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         );
       }

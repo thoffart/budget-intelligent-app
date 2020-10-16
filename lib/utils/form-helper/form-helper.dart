@@ -64,7 +64,7 @@ class FormHelper {
   factory FormHelper.createWithValues(infos, values) {
     dynamic newInfo = infos.map((info) {
       if (info['hasMask']) {
-        return { 'key': info['key'], 'controller': info['mask'] == 'money' ? MoneyMaskedTextController(leftSymbol: 'R\$ ', decimalSeparator: ',', thousandSeparator: '.', initialValue: ((values[info['key']] !=  null ? double.parse(values[info['key']]) : 0) + 0.0)) : MaskedTextController(mask: info['mask'], text: (values[info['key']] ?? '').toString()) };
+        return { 'key': info['key'], 'controller': info['mask'] == 'money' ? MoneyMaskedTextController(leftSymbol: 'R\$ ', decimalSeparator: ',', thousandSeparator: '.', initialValue: (values[info['key']] !=  null ? (values[info['key']] is double) ? (values[info['key']]) : (values[info['key']]).toDouble() : 0) ) : MaskedTextController(mask: info['mask'], text: (values[info['key']] ?? '').toString()) };
       }
       if (values[info['key']] is String || values[info['key']] == null || values[info['key']] is int || values[info['key']] is double) {
         return { 'key': info['key'], 'controller': TextEditingController(text: (values[info['key']] ?? '').toString()) };

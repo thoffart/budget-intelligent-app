@@ -5,7 +5,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
 
 class ImagePickerTflite extends StatefulWidget {
-  ImagePickerTflite({Key key}) : super(key: key);
+  const ImagePickerTflite({
+    Key key,
+    @required this.updateName,
+  }) : super(key: key);
+
+  final void Function(String) updateName;
 
   @override
   _ImagePickerTfliteState createState() => _ImagePickerTfliteState();
@@ -25,6 +30,7 @@ class _ImagePickerTfliteState extends State<ImagePickerTflite> {
       imageURI = imageFile;
       path = imageFile.path;
     });
+    await classifyImage();
   }
 
   Future classifyImage() async {
@@ -36,6 +42,7 @@ class _ImagePickerTfliteState extends State<ImagePickerTflite> {
     setState(() {
       result = output.toString();
     });
+    widget.updateName(output.first['detectedClass']);
   }
 
   Future getImageFromGallery() async {
@@ -45,49 +52,43 @@ class _ImagePickerTfliteState extends State<ImagePickerTflite> {
       imageURI = imageFile;
       path = imageFile.path;
     });
+    await classifyImage();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
         children: <Widget>[
-        imageURI == null
-          ? Text('Sem Imagem')
-          : Image.file(imageURI, width: 300, height: 200, fit: BoxFit.cover),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 30, 0, 20),
-          child: RaisedButton(
-            onPressed: getImageFromCamera,
-            child: Text('Selecione imagem da camera'),
-            textColor: Colors.white,
-            color: Colors.blue,
-            padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-          )),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-          child: RaisedButton(
-            onPressed: getImageFromGallery,
-            child: Text('Selecione imagem da galeria'),
-            textColor: Colors.white,
-            color: Colors.blue,
-            padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-          )),
-/*         Container(
-          margin: EdgeInsets.fromLTRB(0, 30, 0, 20),
-          child: RaisedButton(
-            onPressed: classifyImage,
-            child: Text('Classificar imagem'),
-            textColor: Colors.white,
-            color: Colors.blue,
-            padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-          )),
-        result == null
-          ? Text('Resultado: ')
-          : Text(result) */
-    ]))
-    );
+        Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RaisedButton(
+                    onPressed: getImageFromCamera,
+                    child: Text('Selecionar imagem da camera'),
+                    textColor: Colors.white,
+                    color: Colors.purple,
+                    padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                  ),
+              )
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RaisedButton(
+                  onPressed: getImageFromGallery,
+                  child: Text('Selecionar imagem da galeria'),
+                  textColor: Colors.white,
+                  color: Colors.purple,
+                  padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                ),
+              )
+            ),
+          ],
+        ),
+        if(imageURI != null)
+          Image.file(imageURI, width: 300, height: 200, fit: BoxFit.cover),
+    ]);
   }
 }

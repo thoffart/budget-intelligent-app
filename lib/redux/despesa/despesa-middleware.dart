@@ -3,6 +3,7 @@ import 'package:graphql/client.dart';
 import 'package:redux/redux.dart';
 import 'package:tcc_app/app-state.dart';
 import 'package:tcc_app/client/base-graphql-client.dart';
+import 'package:tcc_app/keys.dart';
 import 'package:tcc_app/redux/despesa/despesa-actions.dart';
 import 'package:tcc_app/redux/produto/produto-actions.dart';
 
@@ -15,6 +16,41 @@ final String getAllDespesaQuery = r'''
       categoria
       produto {
         id
+        id_despesa
+        quantidade
+        nome
+        valor
+    }
+    }
+  }
+''';
+
+const String createDespesaMutation = r'''
+  mutation createDespesa($input: CreateDespesaInput!) {
+    createDespesa(input: $input) {
+      id
+      nome
+      categoria
+      produto {
+        id
+        id_despesa
+        quantidade
+        nome
+        valor
+    }
+    }
+  }
+''';
+
+const String updateDespesaMutation = r'''
+  mutation updateDespesa($input: UpdateDespesaInput!) {
+    updateDespesa(input: $input) {
+      id
+      nome
+      categoria
+      produto {
+        id
+        id_despesa
         quantidade
         nome
         valor
@@ -59,20 +95,47 @@ class DespesaMiddleware extends MiddlewareClass {
     }
     
     if (action is CadastroDespesa) {
+      final MutationOptions _createDespesaMutationOptions = MutationOptions(
+        documentNode: gql(createDespesaMutation),
+        variables: <String, dynamic>{
+          'input': action.formValue,
+        }
+      );
+      final _createDespesaMutationResult = await BaseGraphQLClient.client.mutate(_createDespesaMutationOptions);
+
+      if (!_createDespesaMutationResult.hasException) {
+        print(_createDespesaMutationResult);
+        store.dispatch(CadastroDespesaSuccess(_createDespesaMutationResult.data['createDespesa']));
+      }
       
     }
 
     if (action is EditFormDespesa) {
+      final MutationOptions _updateDespesaMutationOptions = MutationOptions(
+        documentNode: gql(updateDespesaMutation),
+        variables: <String, dynamic>{
+          'input':{
+            ...action.formValue,
+            'id_usuario': (store.state as AppState).userState.user.id,
+          },
+        }
+      );
+      final _updateDespesaMutationResult = await BaseGraphQLClient.client.mutate(_updateDespesaMutationOptions);
+
+      if (!_updateDespesaMutationResult.hasException) {
+        print(_updateDespesaMutationResult);
+        store.dispatch(EditFormDespesaSuccess(_updateDespesaMutationResult.data['updateDespesa']));
+      }
       
     }
 
     if (action is CadastroDespesaSuccess) {
-
+      await Keys.navKey.currentState.pop();
     }
 
 
     if (action is EditFormDespesaSuccess) {
-
+      await Keys.navKey.currentState.pop();
     }
 
     if (action is CadastroDespesaError) {

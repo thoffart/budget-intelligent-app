@@ -21,7 +21,7 @@ ProdutoState _cadastroProduto(ProdutoState state, CadastroProduto action) => sta
 
 ProdutoState _cadastroProdutoSuccess(ProdutoState state, CadastroProdutoSuccess action) {
   final Map<String, Map<String, dynamic>> dataNormalized = DartNormalizer.normalizeList([action.produto], 'id').cast<String, Map<String, dynamic>>();
-  final Map<String, Map<String, dynamic>> newProdutoById = {...dataNormalized, ...state.produtoById};
+  final Map<String, Map<String, dynamic>> newProdutoById = {...state.produtoById, ...dataNormalized};
   return state.copyWith(produtoById: newProdutoById);
 }
 
@@ -33,7 +33,7 @@ ProdutoState _editFormProduto(ProdutoState state, EditFormProduto action) => sta
 
 ProdutoState _editFormProdutoSuccess(ProdutoState state, EditFormProdutoSuccess action) {
   final Map<String, Map<String, dynamic>> dataNormalized = DartNormalizer.normalizeList([action.produto], 'id').cast<String, Map<String, dynamic>>();
-  final Map<String, Map<String, dynamic>> newProdutoById = {...dataNormalized, ...state.produtoById};
+  final Map<String, Map<String, dynamic>> newProdutoById = {...state.produtoById, ...dataNormalized};
   return state.copyWith(produtoById: newProdutoById);
 }
 
@@ -41,7 +41,7 @@ ProdutoState _getProdutoFirstTime(ProdutoState state, GetProdutoFirstTime action
 
 ProdutoState _getProdutoFirstTimeSuccess(ProdutoState state, GetProdutoFirstTimeSuccess action) {
   final Map<String, Map<String, dynamic>> dataNormalized = DartNormalizer.normalizeList(action.produtoList, 'id').cast<String, Map<String, dynamic>>();
-  final Map<String, Map<String, dynamic>> newProdutoById = {...dataNormalized, ...state.produtoById};
+  final Map<String, Map<String, dynamic>> newProdutoById = {...state.produtoById, ...dataNormalized};
   return state.copyWith(produtoById: newProdutoById, isFirstTimeAccess: false);
 }
 
@@ -49,12 +49,12 @@ ProdutoState _refreshProduto(ProdutoState state, RefreshProduto action) => state
 
 ProdutoState _refreshProdutoSuccess(ProdutoState state, RefreshProdutoSuccess action) {
   final Map<String, Map<String, dynamic>> dataNormalized = DartNormalizer.normalizeList(action.produtoList, 'id').cast<String, Map<String, dynamic>>();;
-  final Map<String, Map<String, dynamic>> newProdutoById = {...dataNormalized, ...state.produtoById};
+  final Map<String, Map<String, dynamic>> newProdutoById = {...state.produtoById, ...dataNormalized};
   return state.copyWith(produtoById: newProdutoById);
 }
 
 ProdutoState _updateProdutoById(ProdutoState state, UpdateProdutoById action) {
   final Map<String, Map<String, dynamic>> dataNormalized = DartNormalizer.normalizeList(action.produtoList, 'id').cast<String, Map<String, dynamic>>();;
-  final Map<String, Map<String, dynamic>> newProdutoById = {...dataNormalized, ...state.produtoById};
+  final Map<String, Map<String, dynamic>> newProdutoById = {...state.produtoById, ...dataNormalized};
   return state.copyWith(produtoById: newProdutoById);
 }

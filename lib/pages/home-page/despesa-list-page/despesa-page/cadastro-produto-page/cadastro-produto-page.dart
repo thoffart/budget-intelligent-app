@@ -8,10 +8,11 @@ import 'package:tcc_app/utils/form-helper/form-helper.dart';
 
 
 class CadastroProdutoPage extends StatefulWidget {
+  final int idDespesa;
   final Map<String, dynamic> produto;
   static const String tag = 'cadastro-produto-page';
 
-  CadastroProdutoPage(this.produto);
+  CadastroProdutoPage(this.idDespesa,this.produto);
 
   @override
   _CadastroProdutoPageState createState() => _CadastroProdutoPageState();
@@ -45,7 +46,8 @@ class _CadastroProdutoPageState extends State<CadastroProdutoPage> {
             title: Text('Budget Intelligent'),
           ),
           body: FormCadastroProdutoContainer(
-            idProduto: (widget.produto != null) ? widget.produto['id'] : null,
+            idProduto: (widget.produto != null) ? int.parse(widget.produto['id']) : null,
+            idDespesa: widget.idDespesa,
             formHelper: formHelper,
             formValue: _formValue,
             addValueFormProduto: addValueFormProduto,

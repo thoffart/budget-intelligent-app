@@ -15,5 +15,15 @@ class FormParameters {
       'hasMask': false,
     }
   ];
+  static const List<Map<String, dynamic>> despesa = [ 
+    {
+      'key': 'nome',
+      'hasMask': false,
+    },
+    {
+      'key': 'categoria',
+      'hasMask': false,
+    },
+  ];
 
 }

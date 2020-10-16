@@ -1,43 +1,34 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:tcc_app/pages/home-page/despesa-list-page/despesa-page/cadastro-produto-page/form-produto-container/form-produto/form-produto-widget.dart';
+import 'package:tcc_app/pages/home-page/despesa-list-page/cadastro-despesa-page/form-despesa-container/form-despesa-widget/form-despesa-widget.dart';
 import 'package:tcc_app/utils/default-button/default-button.dart';
 import 'package:tcc_app/utils/form-helper/form-helper.dart';
-import 'package:tcc_app/utils/image-picker-tflite/image-picker-tflite.dart';
 
 
-class FormCadastroProdutoContainer extends StatefulWidget {
-  final int idProduto;
+class FormCadastroDespesaContainer extends StatefulWidget {
   final int idDespesa;
   final FormHelper formHelper;
   final Map<String, dynamic> formValue;
-  final Function(Map<String, dynamic> field) addValueFormProduto;
-  final Function(Map<String, dynamic> formValue) cadastroProduto;
-  final Function(Map<String, dynamic> formValue) editFormProduto;
-  const FormCadastroProdutoContainer({
+  final Function(Map<String, dynamic> field) addValueFormDespesa;
+  final Function(Map<String, dynamic> formValue) cadastroDespesa;
+  final Function(Map<String, dynamic> formValue) editFormDespesa;
+  const FormCadastroDespesaContainer({
     Key key,
-    this.idProduto,
     this.idDespesa,
     this.formHelper,
     this.formValue,
-    this.addValueFormProduto,
-    this.cadastroProduto,
-    this.editFormProduto,
+    this.addValueFormDespesa,
+    this.cadastroDespesa,
+    this.editFormDespesa,
   }) : super(key: key);
    @override
-  _FormProdutoContainerState createState() => _FormProdutoContainerState();
+  _FormDespesaContainerState createState() => _FormDespesaContainerState();
 }
 
-class _FormProdutoContainerState extends State<FormCadastroProdutoContainer> {
-  final _formProdutoContainerKey = GlobalKey<FormState>();
+class _FormDespesaContainerState extends State<FormCadastroDespesaContainer> {
+  final _formDespesaContainerKey = GlobalKey<FormState>();
 
-  void _updateNomeProduto(String newName) {
-    setState(() {
-      widget.formHelper.attributes['nome']['controller'].text = newName;
-    });
-  }
-
-  InputDecoration inputFormProdutoDecoration(String hintText) => InputDecoration(
+  InputDecoration inputFormDespesaDecoration(String hintText) => InputDecoration(
     labelText: hintText,
     alignLabelWithHint: true,
     labelStyle: TextStyle(color: Colors.grey, fontSize: 16),
@@ -64,15 +55,15 @@ class _FormProdutoContainerState extends State<FormCadastroProdutoContainer> {
     ),
   );
 
-  Form form(BuildContext context, FormHelper formHelper, InputDecoration Function(String hintText) inputFormProdutoDecoration) => Form(
-    key: _formProdutoContainerKey,
+  Form form(BuildContext context, FormHelper formHelper, InputDecoration Function(String hintText) inputFormDespesaDecoration) => Form(
+    key: _formDespesaContainerKey,
     child: Column(
       children: <Widget>[
-        FormCadastroProdutoWidget(
+        FormCadastroDespesaWidget(
           formHelper: formHelper,
           formValue: widget.formValue,
-          addValueFormProduto: widget.addValueFormProduto,
-          inputFormProdutoDecoration: inputFormProdutoDecoration,
+          addValueFormDespesa: widget.addValueFormDespesa,
+          inputFormDespesaDecoration: inputFormDespesaDecoration,
         ),
       ],
     ),
@@ -97,9 +88,9 @@ class _FormProdutoContainerState extends State<FormCadastroProdutoContainer> {
                           children: <Widget>[
                             Expanded(
                               child: AutoSizeText(
-                                (widget.idProduto == null)
-                                ? 'Cadastro Produto'
-                                : 'Edição Produto',
+                                (widget.idDespesa == null)
+                                ? 'Cadastro Despesa'
+                                : 'Edição Despesa',
                                 style: TextStyle(
                                   fontSize: 30,
                                   color: Colors.black,
@@ -110,25 +101,12 @@ class _FormProdutoContainerState extends State<FormCadastroProdutoContainer> {
                           ],
                         ),
                         SizedBox(height: 8),
-                        Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                child: ImagePickerTflite(
-                                  updateName: _updateNomeProduto,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              form(
-                                context,
-                                widget.formHelper,
-                                inputFormProdutoDecoration,
-                              ),
-                              SizedBox(height: 8),
-                            ],
-                          ),
-                        )
+                        form(
+                          context,
+                          widget.formHelper,
+                          inputFormDespesaDecoration,
+                        ),
+                        SizedBox(height: 8)
                       ],
                     ),
                   )
@@ -137,9 +115,9 @@ class _FormProdutoContainerState extends State<FormCadastroProdutoContainer> {
               Positioned(
                 child: DefaultButton.icon(
                   onPressed: () {
-                    if (_formProdutoContainerKey.currentState.validate()) {
-                      _formProdutoContainerKey.currentState.save();
-                      (widget.idProduto == null) ? widget.cadastroProduto({...widget.formValue, 'id_despesa': widget.idDespesa}) :  widget.editFormProduto({...widget.formValue, 'id_despesa': widget.idDespesa, 'id': widget.idProduto});
+                    if (_formDespesaContainerKey.currentState.validate()) {
+                      _formDespesaContainerKey.currentState.save();
+                      (widget.idDespesa == null) ? widget.cadastroDespesa({...widget.formValue}) :  widget.editFormDespesa({...widget.formValue, 'id': widget.idDespesa});
                     }
                   },
                   iconData: Icons.check,
