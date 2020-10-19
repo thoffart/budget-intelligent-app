@@ -14,6 +14,7 @@ const String createProdutoMutation = r'''
       quantidade
       valor
       nome
+      created_at
     }
   }
 ''';
@@ -26,6 +27,7 @@ const String updateProdutoMutation = r'''
       quantidade
       valor
       nome
+      created_at
     }
   }
 ''';

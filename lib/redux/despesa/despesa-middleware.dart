@@ -20,6 +20,7 @@ final String getAllDespesaQuery = r'''
         quantidade
         nome
         valor
+        created_at
     }
     }
   }
@@ -37,6 +38,7 @@ const String createDespesaMutation = r'''
         quantidade
         nome
         valor
+        created_at
     }
     }
   }
@@ -54,6 +56,7 @@ const String updateDespesaMutation = r'''
         quantidade
         nome
         valor
+        created_at
     }
     }
   }
